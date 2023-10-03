@@ -32,7 +32,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: .NET_mvc-service
+  name: dot_net__mvc-service
 spec:
   selector:
     app: mvc
