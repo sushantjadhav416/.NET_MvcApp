@@ -32,7 +32,7 @@ pipeline {
     // }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "sushantjadhavhcl/.net_app-cicd:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "sushantjadhavhcl/dot_net_app-cicd:${BUILD_NUMBER}"
         DOCKERFILE_LOCATION = "Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
