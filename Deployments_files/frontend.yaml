@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mvc
-        image: sushantjadhavhcl/dot_net_app-cicd:7
+        image: sushantjadhavhcl/dot_net_app-cicd:10
         ports:
         - containerPort: 80
         env:
