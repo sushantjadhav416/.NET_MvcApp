@@ -48,7 +48,7 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "java-maven-sonar-argocd-helm-k8s"
+            GIT_REPO_NAME = ".NET_MvcApp"
             GIT_USER_NAME = "sushantjadhav416"
             // GITHUB_TOKEN = "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"
         }  
@@ -62,7 +62,7 @@ pipeline {
                     git add Deployments_files/frontend.yaml
                     git add -A
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                 '''
             }
         }
