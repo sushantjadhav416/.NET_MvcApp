@@ -21,12 +21,12 @@ spec:
         env:
           - name: ConnectionStrings_ProductsContext
             value: Server=mssql-service;Database=ProductsDb;User=sa;Password="Sushant@123";
-        resources:
-          limits:
-            cpu: "2"
-            memory: "2Gi"
-          requests:
-            cpu: "1"
+        # resources:
+        #   limits:
+        #     cpu: "2"
+        #     memory: "2Gi"
+        #   requests:
+        #     cpu: "1"
 ---
 #Frontend Service
 kind: Service
