@@ -20,7 +20,7 @@ spec:
         - containerPort: 80
         env:
           - name: ConnectionStrings_ProductsContext
-            value: Server=mssql-service;Database=ProductsDb;User=sa;Password="Sushant@123";
+            value: Server=mssql-service;Database=ProductsDb;User=sa;Password="@Aa123456";Trusted_Connection=False;TrustServerCertificate=True;
         # resources:
         #   limits:
         #     cpu: "2"
