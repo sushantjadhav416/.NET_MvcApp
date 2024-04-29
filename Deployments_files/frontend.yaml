@@ -1,0 +1,46 @@
+#Frontend deployment 
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: dot-net-mvc-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mvc
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: mvc
+    spec:
+      containers:
+      - name: mvc
+        image: sushantjadhavhcl/dot_net_app-cicd:13
+        ports:
+        - containerPort: 80
+        env:
+          - name: ConnectionStrings_ProductsContext
+            value: Server=mssql-service;Database=ProductsDb;User=sa;Password="@Aa123456";Trusted_Connection=False;TrustServerCertificate=True;
+        # resources:
+        #   limits:
+        #     cpu: "2"
+        #     memory: "2Gi"
+        #   requests:
+        #     cpu: "1"
+---
+#Frontend Service
+kind: Service
+apiVersion: v1
+metadata:
+  name: dot-net-mvc-service
+spec:
+  selector:
+    app: mvc
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30055
+  type: NodePort
+
+
