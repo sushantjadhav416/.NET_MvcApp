@@ -6,14 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MvcApp.Models
 {
-    public class ProductsContext : DbContext
+    public class InvoiceContext : DbContext
     {
-        public ProductsContext (DbContextOptions<ProductsContext> options)
+        public InvoiceContext (DbContextOptions<InvoiceContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<MvcApp.Models.Product> Product { get; set; }
+        public DbSet<MvcApp.Models.Invoice> Invoices { get; set; }
     }
 }

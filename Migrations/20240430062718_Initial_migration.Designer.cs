@@ -10,9 +10,9 @@ using MvcApp.Models;
 
 namespace MvcApp.Migrations
 {
-    [DbContext(typeof(ProductsContext))]
-    [Migration("20240429071058_InvoiceDB_migration")]
-    partial class InvoiceDB_migration
+    [DbContext(typeof(InvoiceContext))]
+    [Migration("20240430062718_Initial_migration")]
+    partial class Initial_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace MvcApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("MvcApp.Models.Product", b =>
+            modelBuilder.Entity("MvcApp.Models.Invoice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace MvcApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Invoices");
                 });
 #pragma warning restore 612, 618
         }

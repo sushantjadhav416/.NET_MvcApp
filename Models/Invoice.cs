@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MvcApp.Models
 {
-    public class Product
+    public class Invoice
     {
         public int Id { get; set; }
 
