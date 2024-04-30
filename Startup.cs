@@ -12,6 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MvcApp.Models;
+using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Identity.Web.UI;
+using Microsoft.AspNetCore.Routing;
 
 namespace MvcApp
 {
@@ -29,8 +34,17 @@ namespace MvcApp
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<ProductsContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ProductsContext")));
+            services.AddDbContext<InvoiceContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("InvoiceContext")));
+            services.AddMicrosoftIdentityWebAppAuthentication(Configuration,"AzureAd").EnableTokenAcquisitionToCallDownstreamApi().AddInMemoryTokenCaches();
+
+            services.AddRazorPages().AddMvcOptions(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }
+            ).AddMicrosoftIdentityUI();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +80,10 @@ namespace MvcApp
                 app.UseHttpsRedirection();
                 app.UseStaticFiles();
                 app.UseRouting();
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
 
                 app.UseEndpoints(endpoints =>
                 {
