@@ -1,0 +1,50 @@
+trigger:
+
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dockerId: 'sushantjadhavhcl'
+  dockerRepository: 'invoice_management_system'
+  dockerImageName: 'invoice_management_system'
+
+steps:
+
+- task: DotNetCoreCLI@2
+  displayName: restore
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: test
+  inputs:
+    command: 'test'
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'DockerHub'
+    repository: 'sushantjadhavhcl/Invoice_management'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    
