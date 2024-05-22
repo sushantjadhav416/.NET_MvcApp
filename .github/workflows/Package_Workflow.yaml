@@ -17,6 +17,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Package the Application
-      run: dotnet nuget push "bin/Release/invoice_management.1.0.0.nupkg"  --api-key ${{ secrets.GIT_TOKEN }} --source "MvcApp.csproj"
+      run: dotnet nuget push "bin/Release/invoice_management.1.0.0.nupkg"  --api-key ${{ secrets.GI_TOKEN }} --source "https://github.com/sushantjadhav416/Invoice_management_System_in_ASP.NET"
 
     
