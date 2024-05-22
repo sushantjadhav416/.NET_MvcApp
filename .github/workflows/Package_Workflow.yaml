@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Package artifact and push
 
 on:
   push:
@@ -17,6 +17,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Package the Application
-      run: dotnet nuget push "bin/Release/invoice_management.1.0.0.nupkg"  --api-key ${{ secrets.GIT_TOKEN }} --source "github"
+      run: dotnet nuget push "bin/Release/invoice_management.1.0.0.nupkg"  --api-key ${{ secrets.GIT_TOKEN }} --source "MvcApp.csproj"
 
     
