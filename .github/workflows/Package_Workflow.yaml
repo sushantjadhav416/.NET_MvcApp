@@ -16,7 +16,10 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Package the Application
+    - name: Package Application
+      run : dotnet pack --configuration Release
+
+    - name: Push Application
       run: dotnet nuget push "bin/Release/invoice_management.1.0.0.nupkg"  --api-key ${{ secrets.GI_TOKEN }} --source "https://github.com/sushantjadhav416"
 
     
